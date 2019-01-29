@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "target": "ES5",
+    "jsx": "react",
+    "module": "ES6",
+    "moduleResolution": "Node",
+    "noEmitOnError": false,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2017",
+      "esnext.asynciterable",
+      "scripthost"
+    ],
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ],
+  "typeRoots": ["./node_modules/@types", "./@types"]
+}
