@@ -2,14 +2,14 @@ import React, { SFC } from 'react';
 
 import { Title } from 'components/Title';
 
-import styles from './Content.m.scss';
+import styles from './Alerts.m.scss';
 
-const Content: SFC<{}> = () => {
+const RightPanel: SFC<{}> = () => {
   return (
     <div className={styles.container}>
-      <Title label="CPUs Average Load Evolution" />
+      <Title label="Alerts" />
     </div>
   );
 };
 
-export default Content;
+export default RightPanel;

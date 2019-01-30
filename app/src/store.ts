@@ -3,7 +3,8 @@ import thunk from 'redux-thunk';
 
 import { MONITORING_URL } from 'constants/monitor';
 import monitorServiceFactory from 'services/monitorService';
-import { ThunkServices } from 'entities/thunk';
+import { AppThunkServices } from 'entities/thunk';
+import monitorMiddleware from 'middlewares/monitor';
 import reducers, { defaultState } from 'reducers';
 
 const isDevTool: boolean = process.env.NODE_ENV !== 'production'
@@ -15,13 +16,14 @@ const composeEnhancers: Function = isDevTool
   : compose;
 
 const monitorService = monitorServiceFactory(MONITORING_URL);
-const services: ThunkServices = {
+const services: AppThunkServices = {
   monitorService,
 };
 
 const thunkWithServices: Middleware = thunk.withExtraArgument(services);
 
 const middlewares: Middleware[] = [
+  monitorMiddleware,
   thunkWithServices,
 ];
 

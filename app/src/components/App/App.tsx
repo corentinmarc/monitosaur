@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 
 import { Metrics } from 'components/Metrics';
-import { RightPanel } from 'components/RightPanel';
-import { Content } from 'components/Content';
-import { MONITOR_INTERVAL } from 'constants/monitor';
+import { Alerts } from 'components/Alerts';
+import { Evolution } from 'components/Evolution';
 
 import { DispatchProps } from './AppContainer';
 import styles from './App.m.scss';
 
 class App extends Component<DispatchProps> {
-  componentDidMount() {
-    const { getMonitorKPI } = this.props;
-
-    getMonitorKPI();
-    setInterval(getMonitorKPI, MONITOR_INTERVAL);
-  }
-
   render() {
     return (
     <div className={styles.container}>
@@ -23,10 +15,10 @@ class App extends Component<DispatchProps> {
         <Metrics />
       </div>
       <div className={styles.contentPanel}>
-        <Content />
+        <Evolution />
       </div>
       <div className={styles.rightPanel}>
-        <RightPanel />
+      <Alerts />
       </div>
     </div>
     );

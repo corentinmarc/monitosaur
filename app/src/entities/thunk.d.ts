@@ -1,11 +1,12 @@
-import { ThunkAction, ThunkMiddleware } from 'redux-thunk';
+import { ThunkAction, ThunkMiddleware, ThunkDispatch } from 'redux-thunk';
 import { Action, AnyAction } from 'redux';
 
 import { AppGlobalState } from 'reducers';
 import { MonitorService } from 'services/monitorService'; 
 
-export type ThunkServices = {
+export type AppThunkServices = {
   monitorService: MonitorService,
 };
-export type ThunkAction<R> = ThunkAction<R, AppGlobalState, ThunkServices, Action>;
-export type ThunkMiddleware = ThunkMiddleware<AppGlobalState, AnyAction, ThunkServices>;
+export type AppThunkAction<R> = ThunkAction<R, AppGlobalState, AppThunkServices, Action>;
+export type AppThunkDispatch = ThunkDispatch<AppGlobalState, AppThunkServices, Action>;
+export type AppThunkMiddleware = ThunkMiddleware<AppGlobalState, AnyAction, AppThunkServices>;

@@ -1,7 +1,7 @@
 import React, { SFC } from 'react';
 
 import { Title } from 'components/Title';
-import { Metric } from 'components/Metric';
+import { Metric } from 'components/Metrics/Metric';
 
 import { StateProps } from './MetricsContainer';
 import styles from './Metrics.m.scss';

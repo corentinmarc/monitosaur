@@ -1,12 +1,13 @@
 import { createAction, ActionsUnion } from 'actions/typedActions';
 import {
+  START_POLLING_MONITOR_KPI,
   FETCH_MONTITOR_KPI_REQUEST,
   FETCH_MONTITOR_KPI_SUCCESS,
 } from 'constants/monitor';
-import { ThunkAction } from 'entities/thunk';
+import { AppThunkAction } from 'entities/thunk';
 import { MonitorResponse } from 'entities/monitor';
 
-export const getMonitorKPI = (): ThunkAction<Promise<void>> => (
+export const getMonitorKPI = (): AppThunkAction<Promise<void>> => (
   dispatch,
   _,
   thunkServices,
@@ -21,12 +22,14 @@ export const getMonitorKPI = (): ThunkAction<Promise<void>> => (
     .catch((error) => { console.error(error); });
 };
 
+export const startPollingMonitorKPI = () => createAction(START_POLLING_MONITOR_KPI);
 export const fetchMonitorKPIRequest = () => createAction(FETCH_MONTITOR_KPI_REQUEST);
 export const fetchMonitorKPISuccess = (monitorKPIs: MonitorResponse) =>
   createAction(FETCH_MONTITOR_KPI_SUCCESS, { monitorKPIs });
 
 // Only redux Actions, no thunks
 export const Actions = {
+  startPollingMonitorKPI,
   fetchMonitorKPIRequest,
   fetchMonitorKPISuccess,
 };
