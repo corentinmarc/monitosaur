@@ -8,6 +8,8 @@ router.get('/', function(req, res, next) {
   freemem = os.freemem();
   totalmem = os.totalmem();
 
+  res.header("Access-Control-Allow-Origin", "*");
+
   res.send({
     cpus,
     loadAvg,

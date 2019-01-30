@@ -7,7 +7,7 @@ import styles from './Content.m.scss';
 const Content: SFC<{}> = () => {
   return (
     <div className={styles.container}>
-      <Title label="CPUs Average Evolution" />
+      <Title label="CPUs Average Load Evolution" />
     </div>
   );
 };
