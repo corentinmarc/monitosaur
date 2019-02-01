@@ -1,21 +1,27 @@
 import { connect } from 'react-redux';
 
 import { AppGlobalState } from 'reducers';
+import {
+  cpusSelector,
+  loadAverageSelector,
+  freememSelector,
+  totalmemSelector,
+ } from 'selectors/monitor';
 
 import Metrics from './Metrics';
 
 export interface StateProps {
-  cpus: Maybe<number>;
-  loadAvg: Maybe<number>;
-  freeMem: Maybe<number>;
-  totalmem: Maybe<number>;
+  cpus: AppGlobalState['monitor']['cpus'];
+  loadAvg: AppGlobalState['monitor']['loadAvg'];
+  freeMem: AppGlobalState['monitor']['freemem'];
+  totalmem: AppGlobalState['monitor']['totalmem'];
 }
 
 const mapStateToProps = (state: AppGlobalState): StateProps => ({
-  cpus: state.monitor.cpus,
-  loadAvg: state.monitor.loadAvg,
-  freeMem: state.monitor.freemem,
-  totalmem: state.monitor.totalmem,
+  cpus: cpusSelector(state),
+  loadAvg: loadAverageSelector(state),
+  freeMem: freememSelector(state),
+  totalmem: totalmemSelector(state),
 });
 
 export default connect<StateProps, {}, {}, AppGlobalState>(

@@ -6,6 +6,7 @@
   "author": "corentinmarc <corentin.marc@gmail.com>",
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@types/d3": "^5.7.0",
     "@types/jest": "^23.3.13",
     "@types/node": "^10.12.19",
     "@types/react": "^16.7.22",
@@ -36,6 +37,7 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "d3": "^5.8.0",
     "normalize-css": "^2.3.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
