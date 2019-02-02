@@ -10,6 +10,7 @@ const monitorMiddleware: AppThunkMiddleware = store => next => (action: AllActio
 
   switch (action.type) {
     case START_POLLING_MONITOR_KPI:
+      dispatchGetMonitorKPI(store.dispatch)();
       setInterval(dispatchGetMonitorKPI(store.dispatch), MONITOR_INTERVAL);
       break;
     default:
