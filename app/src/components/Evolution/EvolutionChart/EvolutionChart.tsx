@@ -14,7 +14,7 @@ import {
 
 import {
   MONITOR_INTERVAL,
-  MONITOR_EVOLUTION_DURATION,
+  MONITOR_PERIODS,
 } from 'constants/monitor';
 import { MonitorEvolutionPoint } from 'entities/monitor';
 
@@ -27,11 +27,10 @@ const MARGIN = {
   right: 40,
 };
 const TRANSITION_DURATION = 1000;
-const NUMBER_POINTS = MONITOR_EVOLUTION_DURATION / MONITOR_INTERVAL;
 const RECT_RATIO = 0.5;
-const RECT_WIDTH = RECT_RATIO * WIDTH / NUMBER_POINTS;
 
 interface Props {
+  periodToDisplay: MONITOR_PERIODS;
   data: MonitorEvolutionPoint[];
 };
 
@@ -45,7 +44,7 @@ class EvolutionChart extends Component<Props> {
   private chartRef: RefObject<SVGSVGElement> = React.createRef();
   private chartSVG: Maybe<Selection<SVGSVGElement, any, null, undefined>> = null;
   private yAxisSVG: Maybe<Selection<SVGGElement, any, null, undefined>> = null;
-  private xScale = scaleLinear().range([WIDTH - MARGIN.right - RECT_WIDTH, MARGIN.left]).domain([0, NUMBER_POINTS - 1]);
+  private xScale = scaleLinear().range([WIDTH - MARGIN.right, MARGIN.left]);
   private yScale = scaleLinear<number>().range([HEIGHT, 0]);
   private colorScale = scaleSequential(interpolateRdYlGn).domain([1, 0]);
   private transition: Transition<SVGRectElement, MonitorEvolutionPoint, SVGSVGElement, any> =
@@ -90,7 +89,18 @@ class EvolutionChart extends Component<Props> {
       return this.create();
     }
  
-    const { data } = this.props;
+    const {
+      data,
+      periodToDisplay
+    } = this.props;
+
+    // Adjust xScale
+    const NUMBER_POINTS = periodToDisplay / MONITOR_INTERVAL;
+    const RECT_WIDTH = RECT_RATIO * WIDTH / NUMBER_POINTS;
+    this.xScale
+      .domain([0, NUMBER_POINTS - 1])
+      .range([WIDTH - MARGIN.right - RECT_WIDTH, MARGIN.left]);
+
 
     // Adjust yScale domain
     const yDomainMin = 0;
@@ -111,7 +121,7 @@ class EvolutionChart extends Component<Props> {
 
     // Style yAxis ticks
     this.yAxisSVG.selectAll(".tick *")
-      .attr('transform', 'translate(' + (-this.xScale(0) - MARGIN.right) + ', 0)')
+      .attr('transform', 'translate(' + (-this.xScale(0) - RECT_WIDTH - MARGIN.right) + ', 0)')
       .filter("line")
       .attr("stroke", "rgba(255, 255, 255, 0.5)")
       .attr("stroke-dasharray", "2,2");
@@ -147,7 +157,8 @@ class EvolutionChart extends Component<Props> {
       .transition(this.transition)
       .attr('x', (_, i) => this.xScale(i))
       .attr('y', (d) => d ? this.yScale(d.loadAvg) : HEIGHT)
-      .attr('height', (d) => d ? HEIGHT - this.yScale(d.loadAvg) : 0);
+      .attr('height', (d) => d ? HEIGHT - this.yScale(d.loadAvg) : 0)
+      .attr('width', RECT_WIDTH);
   }
     
   render() {
