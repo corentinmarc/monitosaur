@@ -5,5 +5,27 @@
 }
 
 .chart {
+    position: relative;
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    margin: 10px 10px 0 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('../../assets/images/logo.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      opacity: 0.05;
+    }
 }

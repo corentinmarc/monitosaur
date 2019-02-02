@@ -4,14 +4,14 @@ import {
   FETCH_MONTITOR_KPI_SUCCESS,
 } from 'constants/monitor';
 import { AllActions } from 'actions';
-import { MonitorResponse } from 'entities/monitor';
+import { MonitorResponse, MonitorEvolutionPoint } from 'entities/monitor';
 
 export interface MonitorState {
   cpus: Maybe<number>;
   loadAvg: Maybe<number>;
   freemem: Maybe<number>;
   totalmem: Maybe<number>;
-  evolutionLoadAvg: MonitorState['loadAvg'][];
+  evolutionLoadAvg: MonitorEvolutionPoint[];
 }
 
 export const defaultState: MonitorState = {
@@ -31,11 +31,12 @@ const updateMonitorState = (
     loadAvg,
     freemem,
     totalmem,
+    timestamp,
    } = payload;
 
    const numberOfEvolutionPoints = MONITOR_EVOLUTION_DURATION / MONITOR_INTERVAL;
    // Store the last numberOfEvolutionPoints and not much to avoid memory leaks
-   const evolutionLoadAvg = [loadAvg, ...state.evolutionLoadAvg].slice(0, numberOfEvolutionPoints);
+   const evolutionLoadAvg = [{ loadAvg, timestamp }, ...state.evolutionLoadAvg].slice(0, numberOfEvolutionPoints);
 
   return ({
     ...state,

@@ -6,11 +6,11 @@ import { Metric } from 'components/Metrics/Metric';
 import { StateProps } from './MetricsContainer';
 import styles from './Metrics.m.scss';
 
-const convertToPercent = (value: Maybe<number>): Maybe<string> => {
+const convertToFixed = (value: Maybe<number>): Maybe<string> => {
   if (typeof value !== 'number') {
     return value;
   }
-  return `${(value * 100).toFixed(1)}%`;
+  return `${value.toFixed(2)}`;
 };
 
 const convertToGB = (value: Maybe<number>): Maybe<string> => {
@@ -31,7 +31,7 @@ const Metrics: SFC<StateProps> = ({
       <Title label="Metrics" />
       <div className={styles.metrics}>
         <Metric label="Number of CPUs" value={cpus} />
-        <Metric label="CPUs Load" value={convertToPercent(loadAvg)} />
+        <Metric label="CPUs Load" value={convertToFixed(loadAvg)} />
         <Metric label="Free RAM" value={convertToGB(freeMem)} />
         <Metric label="Total RAM" value={convertToGB(totalmem)} />
       </div>

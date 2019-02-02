@@ -6,8 +6,6 @@
     "module": "ES6",
     "moduleResolution": "Node",
     "noEmitOnError": false,
-    "strict": true,
-    "strictNullChecks": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "sourceMap": true,
