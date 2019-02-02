@@ -32,13 +32,13 @@ const RECT_RATIO = 0.5;
 interface Props {
   periodToDisplay: MONITOR_PERIODS;
   data: MonitorEvolutionPoint[];
-};
+}
 
 const getTickValues = (maxValue: number) => {
   const baseTickValues = [0.25, 0.5, 0.75, 1];
   const highestTickValues = range(2, Math.ceil(maxValue));
   return [...baseTickValues, ...highestTickValues];
-}
+};
 
 class EvolutionChart extends Component<Props> {
   private chartRef: RefObject<SVGSVGElement> = React.createRef();
@@ -72,14 +72,14 @@ class EvolutionChart extends Component<Props> {
       .attr('width', WIDTH)
       .attr('height', HEIGHT)
       .attr('viewBox', `0 0 ${WIDTH} ${HEIGHT}`)
-      .attr("preserveAspectRatio", "xMidYMax meet")
+      .attr('preserveAspectRatio', 'xMidYMax meet')
       .style('width', '100%')
       .style('height', '100%');
 
     // Create the yAxis SVG container
     this.yAxisSVG = this.chartSVG
       .append('g')
-      .attr('transform', 'translate(' + (this.xScale(0) + MARGIN.right) + ', 0)');
+      .attr('transform', `translate(${(this.xScale(0) + MARGIN.right)}, 0)`);
 
     this.update();
   }
@@ -88,10 +88,10 @@ class EvolutionChart extends Component<Props> {
     if (!this.chartSVG) {
       return this.create();
     }
- 
+
     const {
       data,
-      periodToDisplay
+      periodToDisplay,
     } = this.props;
 
     // Adjust xScale
@@ -101,35 +101,37 @@ class EvolutionChart extends Component<Props> {
       .domain([0, NUMBER_POINTS - 1])
       .range([WIDTH - MARGIN.right - RECT_WIDTH, MARGIN.left]);
 
-
     // Adjust yScale domain
     const yDomainMin = 0;
-    const yDomainMax = data.reduce((max: number, point) => {
-      if (typeof point.loadAvg === 'number' && point.loadAvg > max) {
-        return point.loadAvg;
-      }
-      return max;
-    }, 1.1);
+    const yDomainMax = data.reduce(
+      (max: number, point) => {
+        if (typeof point.loadAvg === 'number' && point.loadAvg > max) {
+          return point.loadAvg;
+        }
+        return max;
+      },
+      1.1,
+    );
     this.yScale.domain([yDomainMin, yDomainMax]);
 
     // Draw yAxis
     const yAxis = axisRight(this.yScale)
       .tickValues(getTickValues(yDomainMax))
-      .tickFormat(format(".2f"))
+      .tickFormat(format('.2f'))
       .tickSize(WIDTH - MARGIN.right + 10);
     yAxis(this.yAxisSVG);
 
     // Style yAxis ticks
-    this.yAxisSVG.selectAll(".tick *")
-      .attr('transform', 'translate(' + (-this.xScale(0) - RECT_WIDTH - MARGIN.right) + ', 0)')
-      .filter("line")
-      .attr("stroke", "rgba(255, 255, 255, 0.5)")
-      .attr("stroke-dasharray", "2,2");
+    this.yAxisSVG.selectAll('.tick *')
+      .attr('transform', `translate(${(-this.xScale(0) - RECT_WIDTH - MARGIN.right)}, 0)`)
+      .filter('line')
+      .attr('stroke', 'rgba(255, 255, 255, 0.5)')
+      .attr('stroke-dasharray', '2,2');
     this.yAxisSVG.select('.domain').remove();
 
     const rect = this.chartSVG
       .selectAll<SVGRectElement, any>('rect')
-      .data(data, (d) => d.timestamp );
+      .data(data, d => d.timestamp);
 
     const exitingRect = rect.exit();
 
@@ -151,20 +153,20 @@ class EvolutionChart extends Component<Props> {
       .attr('y', HEIGHT)
       .attr('height', 0)
       .remove();
-     
+
     // Animate entering + persisting rects
     rect.merge(enteringRect)
       .transition(this.transition)
       .attr('x', (_, i) => this.xScale(i))
-      .attr('y', (d) => d ? this.yScale(d.loadAvg) : HEIGHT)
-      .attr('height', (d) => d ? HEIGHT - this.yScale(d.loadAvg) : 0)
+      .attr('y', d => d ? this.yScale(d.loadAvg) : HEIGHT)
+      .attr('height', d => d ? HEIGHT - this.yScale(d.loadAvg) : 0)
       .attr('width', RECT_WIDTH);
   }
-    
+
   render() {
     return (
       <svg ref={this.chartRef} />
-    )
+    );
   }
 }
 

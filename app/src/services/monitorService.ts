@@ -7,11 +7,11 @@ export interface MonitorService {
 const fetchOptions: {
   method: 'GET',
   mode: 'cors',
-  cache: 'no-store'
+  cache: 'no-store',
 } = {
   method: 'GET',
   mode: 'cors',
-  cache: 'no-store' 
+  cache: 'no-store',
 };
 
 const monitorServiceFactory = (monitoringUrl: string): MonitorService => {

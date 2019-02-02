@@ -6,7 +6,7 @@ import {
   evolutionLoadAverageForPeriodSelector,
   periodToDisplaySelector,
  } from 'selectors/monitor';
- import { changePeriod } from 'actions/monitor';
+import { changePeriod } from 'actions/monitor';
 
 import Evolution from './Evolution';
 
@@ -16,7 +16,7 @@ export interface StateProps {
 }
 
 export interface DispatchProps {
-  changePeriod: typeof changePeriod,
+  changePeriod: typeof changePeriod;
 }
 
 const mapStateToProps = (state: AppGlobalState): StateProps => {
@@ -24,7 +24,7 @@ const mapStateToProps = (state: AppGlobalState): StateProps => {
   return {
     periodToDisplay,
     evolutionLoadAverage: evolutionLoadAverageForPeriodSelector(state, periodToDisplay),
-  }
+  };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => bindActionCreators(

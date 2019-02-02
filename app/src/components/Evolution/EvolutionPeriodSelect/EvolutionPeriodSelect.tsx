@@ -20,17 +20,15 @@ class EvolutionPeriodSelect extends Component<Props> {
       <select
         className={styles.select}
         value={selectedPeriod}
-        onChange={(event) => onSelect(Number(event.target.value))}
+        onChange={event => onSelect(Number(event.target.value))}
       >
         {
           Object.keys(MONITOR_PERIODS)
             .filter((key: any) => typeof MONITOR_PERIODS[key] === 'number')
-            .map((key: any) => {
-              return <option key={key} value={MONITOR_PERIODS[key]}>{key}</option>
-            })
+            .map((key: any) => <option key={key} value={MONITOR_PERIODS[key]}>{key}</option>)
         }
       </select>
-    )
+    );
   }
 }
 

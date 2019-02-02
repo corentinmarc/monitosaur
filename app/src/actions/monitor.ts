@@ -29,7 +29,8 @@ export const fetchMonitorKPIRequest = () => createAction(FETCH_MONITOR_KPI_REQUE
 export const fetchMonitorKPISuccess = (monitorKPIs: MonitorResponse) =>
   createAction(FETCH_MONITOR_KPI_SUCCESS, { monitorKPIs });
 
-export const changePeriod = (period: MONITOR_PERIODS) => createAction(CHANGE_MONITOR_PERIOD, { period });
+export const changePeriod = (period: MONITOR_PERIODS) =>
+  createAction(CHANGE_MONITOR_PERIOD, { period });
 
 // Only redux Actions, no thunks
 export const Actions = {
