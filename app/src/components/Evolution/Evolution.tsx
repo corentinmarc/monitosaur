@@ -15,7 +15,7 @@ const Content: SFC<StateProps & DispatchProps> = ({
   return (
     <div className={styles.container}>
       <Title
-        label="CPUs Average Load Evolution"
+        label="CPUs Load Evolution"
         renderAfter={() => <EvolutionPeriodSelect
           onSelect={changePeriod}
           selectedPeriod={periodToDisplay}

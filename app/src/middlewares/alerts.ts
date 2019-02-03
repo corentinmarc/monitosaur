@@ -5,6 +5,7 @@ import {
   setCurrentAlert,
   addAlertMessage,
 } from 'actions/alerts';
+import { displayNotification } from 'actions/notifications';
 import { FETCH_MONITOR_KPI_SUCCESS } from 'constants/monitor';
 import {
   ALERT_LOAD_THRESHOLD,
@@ -13,6 +14,8 @@ import {
 } from 'constants/alerts';
 import { evolutionLoadAverageForPeriodSelector } from 'selectors/monitor';
 import { currentAlertSelector } from 'selectors/alerts';
+import okIcon from 'assets/images/ok.png';
+import warnIcon from 'assets/images/warn.png';
 
 const getLoadAverage = (evolution: MonitorEvolutionPoint[]) => evolution.reduce((total, point) => total + point.loadAvg, 0) / evolution.length;
 
@@ -32,6 +35,11 @@ const alertsMiddleware: AppThunkMiddleware = store => next => (action: AllAction
         store.dispatch(
           addAlertMessage(ALERT_MESSAGE_TYPES.ALERT, { loadAvg }),
         );
+        store.dispatch(displayNotification({
+          title: 'High CPU load',
+          body: `Load average during last ${ALERT_DURATION_THRESHOLD / 60 / 1000} minutes: ${loadAvg.toFixed(2)}`,
+          icon: warnIcon,
+        }));
         if (!currentAlert) {
           // We set a current alert
           store.dispatch(
@@ -48,6 +56,11 @@ const alertsMiddleware: AppThunkMiddleware = store => next => (action: AllAction
           const duration = (Date.now() - currentAlert.startedAt); // Duration in ms
           store.dispatch(setCurrentAlert(null));
           store.dispatch(addAlertMessage(ALERT_MESSAGE_TYPES.ALERT_STOP, { duration }));
+          store.dispatch(displayNotification({
+            title: 'Normal CPU Load',
+            body: `Load average during last ${ALERT_DURATION_THRESHOLD / 60 / 1000} minutes return below ${ALERT_LOAD_THRESHOLD}`,
+            icon: okIcon,
+          }));
       }
       break;
     default:

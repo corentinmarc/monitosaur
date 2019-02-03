@@ -5,7 +5,7 @@ export const MONITOR_EVOLUTION_DURATION = 60 * 1000; // 1 minutes
 export const MONITOR_EVOLUTION_HISTORY = 60 * 60 * 1000; // 1 hour
 
 export enum MONITOR_PERIODS {
-  '1 Minute' = 60 * 1000,
+  '2 Minutes' = 2 * 60 * 1000,
   '10 Minutes' = 10 * 60 * 1000,
   '30 Minutes' = 30 * 60 * 1000,
   '1 Hour' = 60 * 60 * 1000,

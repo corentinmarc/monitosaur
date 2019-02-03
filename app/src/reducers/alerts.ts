@@ -17,11 +17,10 @@ export interface AlertsState {
   currentAlert: Maybe<Alert>;
 }
 
-// @ts-ignore
 const alertMessagesFixture = (nbAlert: number): AlertMessage[] => {
   return range(0, nbAlert * 2).map((index) => {
-    const type = index % 2 ? ALERT_MESSAGE_TYPES.ALERT : ALERT_MESSAGE_TYPES.ALERT_STOP;
-    const timestamp = Date.now() - index * 60 * 60 * 1000;
+    const type = index % 5 ? ALERT_MESSAGE_TYPES.ALERT : ALERT_MESSAGE_TYPES.ALERT_STOP;
+    const timestamp = Date.now() - index * 10 * 1000;
     const id = `${type}-${timestamp}`;
 
     if (type === ALERT_MESSAGE_TYPES.ALERT) {
@@ -38,15 +37,15 @@ const alertMessagesFixture = (nbAlert: number): AlertMessage[] => {
         id,
         timestamp,
         type,
-        duration: 2 + Math.random() * 10,
+        duration: (2 + Math.random() * 10) * 60 * 1000,
       }
     }
   });
 };
 
 export const defaultState: AlertsState = {
-  messages: [],
-  // messages: alertMessagesFixture(10),
+  // messages: [],
+  messages: alertMessagesFixture(10),
   currentAlert: null,
 };
 
