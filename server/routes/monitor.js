@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
   loadAvg = os.loadavg()[0]/cpus;
   freemem = os.freemem();
   totalmem = os.totalmem();
+  timestamp = Date.now();
 
   res.header("Access-Control-Allow-Origin", "*");
 
@@ -15,6 +16,7 @@ router.get('/', function(req, res, next) {
     loadAvg,
     freemem,
     totalmem,
+    timestamp,
   });
 });
 
