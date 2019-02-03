@@ -2,14 +2,30 @@ import React, { SFC } from 'react';
 
 import { Title } from 'components/Title';
 
+import { AlertMessage } from './AlertMessage';
+import { StateProps, DispatchProps } from './AlertsContainer';
 import styles from './Alerts.m.scss';
 
-const RightPanel: SFC<{}> = () => {
+const Alerts: SFC<StateProps & DispatchProps> = ({
+  alertMessages,
+  removeAlertMessage,
+}) => {
   return (
     <div className={styles.container}>
-      <Title label="Alerts" />
+      <div className={styles.titleContainer}>
+        <Title label="Alerts" />
+      </div>
+      <div className={styles.alertsContainer}>
+        {
+          alertMessages.map(message => <AlertMessage
+            {...message}
+            key={message.id}
+            onClose={removeAlertMessage}
+          />)
+        }
+      </div>
     </div>
   );
 };
 
-export default RightPanel;
+export default Alerts;

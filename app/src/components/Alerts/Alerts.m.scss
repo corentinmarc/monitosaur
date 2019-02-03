@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.titleContainer {
+  flex-shrink: 0;
+}
+
+.alertsContainer {
+  overflow: auto;
+  margin-bottom: 10px;
+}
