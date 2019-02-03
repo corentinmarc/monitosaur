@@ -1,0 +1,14 @@
+{
+  "name": "datadog-hiring-test",
+  "version": "1.0.0",
+  "description": "Datadog Hiring test",
+  "author": "corentinmarc <corentin.marc@gmail.com>",
+  "scripts": {
+    "build-app": "cd ./app && yarn build:prod",
+    "install-dependencies": "cd ./app && yarn install --pure-lockfile && cd ../server && yarn install --pure-lockfile",
+    "install-public": "mkdir -p ./server/public && cp ./app/build/* ./server/public",
+    "start-server": "cd ./server && yarn start",
+    "start": "yarn install-dependencies && yarn build-app && yarn install-public && yarn start-server",
+    "start-with-fixtures": "FIXTURES=1 yarn start"
+  }
+}

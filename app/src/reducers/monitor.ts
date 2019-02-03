@@ -1,5 +1,3 @@
-import { range } from 'd3';
-
 import {
   MONITOR_EVOLUTION_HISTORY,
   MONITOR_INTERVAL,
@@ -9,6 +7,8 @@ import {
 } from 'constants/monitor';
 import { AllActions } from 'actions';
 import { MonitorResponse, MonitorEvolutionPoint } from 'entities/monitor';
+import { getEvolutionLoadAvgFixture } from 'fixtures/monitors';
+import { shouldUseFixture } from 'helpers/fixtures';
 
 export interface MonitorState {
   cpus: Maybe<number>;
@@ -19,23 +19,13 @@ export interface MonitorState {
   periodToDisplay: MONITOR_PERIODS;
 }
 
-const evolutionLoadAvgFixture = (nbPoint: number): MonitorEvolutionPoint[] => {
-  let value = 0.5;
-  return range(0, nbPoint).map((index) => {
-    value = value + (0.5 - Math.random()) * 0.1;
-    return {
-      timestamp: index,
-      loadAvg: value,
-    };
-  });
-};
-
 export const defaultState: MonitorState = {
   cpus: null,
   loadAvg: null,
   freemem: null,
   totalmem: null,
-  evolutionLoadAvg: evolutionLoadAvgFixture(MONITOR_EVOLUTION_HISTORY / MONITOR_INTERVAL),
+  evolutionLoadAvg: shouldUseFixture() ?
+    getEvolutionLoadAvgFixture(MONITOR_EVOLUTION_HISTORY / MONITOR_INTERVAL) : [],
   periodToDisplay: MONITOR_PERIODS['10 Minutes'],
 };
 

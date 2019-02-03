@@ -1,52 +1,23 @@
-import { range } from 'd3';
-
 import {
   SET_CURRENT_ALERT,
   ADD_ALERT_MESSAGE,
   REMOVE_ALERT_MESSAGE,
-  ALERT_MESSAGE_TYPES,
 } from 'constants/alerts';
 import {
   AlertMessage,
   Alert,
 } from 'entities/alerts';
 import { AllActions } from 'actions';
-import { fromMinutesToMs } from 'helpers/converters';
+import { shouldUseFixture } from 'helpers/fixtures';
+import { getAlertMessagesFixture } from 'fixtures/alerts';
 
 export interface AlertsState {
   messages: AlertMessage[];
   currentAlert: Maybe<Alert>;
 }
 
-const alertMessagesFixture = (nbAlert: number): AlertMessage[] => {
-  return range(0, nbAlert * 2).map((index) => {
-    const type = index % 5 ? ALERT_MESSAGE_TYPES.ALERT : ALERT_MESSAGE_TYPES.ALERT_STOP;
-    const timestamp = Date.now() - index * 10 * 1000;
-    const id = `${type}-${timestamp}`;
-
-    if (type === ALERT_MESSAGE_TYPES.ALERT) {
-      return {
-        id,
-        timestamp,
-        type,
-        loadAvg: 1 + Math.random() * 3,
-      };
-    }
-
-    if (type === ALERT_MESSAGE_TYPES.ALERT_STOP) {
-      return {
-        id,
-        timestamp,
-        type,
-        duration: fromMinutesToMs(2 + Math.random() * 10),
-      };
-    }
-  });
-};
-
 export const defaultState: AlertsState = {
-  // messages: [],
-  messages: alertMessagesFixture(10),
+  messages: shouldUseFixture() ? getAlertMessagesFixture(20) : [],
   currentAlert: null,
 };
 
