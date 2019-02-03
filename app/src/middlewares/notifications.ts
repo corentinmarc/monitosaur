@@ -4,7 +4,7 @@ import { DISPLAY_NOTIFICATION } from 'constants/notifications';
 
 let canDisplayNotification = false;
 
-Notification.requestPermission(permission => {
+Notification.requestPermission((permission) => {
   if (permission === 'granted') {
     canDisplayNotification = true;
   }
@@ -20,7 +20,7 @@ const notificationsMiddleware: AppThunkMiddleware = _ => next => (action: AllAct
         {
           body: action.payload.body,
           icon: action.payload.icon,
-        }
+        },
       );
       break;
     default:

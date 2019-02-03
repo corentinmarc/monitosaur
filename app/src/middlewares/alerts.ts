@@ -16,8 +16,10 @@ import { evolutionLoadAverageForPeriodSelector } from 'selectors/monitor';
 import { currentAlertSelector } from 'selectors/alerts';
 import okIcon from 'assets/images/ok.png';
 import warnIcon from 'assets/images/warn.png';
+import { fromMsToMinutes } from 'helpers/converters';
 
-const getLoadAverage = (evolution: MonitorEvolutionPoint[]) => evolution.reduce((total, point) => total + point.loadAvg, 0) / evolution.length;
+const getLoadAverage = (evolution: MonitorEvolutionPoint[]) =>
+  evolution.reduce((total, point) => total + point.loadAvg, 0) / evolution.length;
 
 const alertsMiddleware: AppThunkMiddleware = store => next => (action: AllActions) => {
   next(action);
@@ -25,7 +27,8 @@ const alertsMiddleware: AppThunkMiddleware = store => next => (action: AllAction
   switch (action.type) {
     case FETCH_MONITOR_KPI_SUCCESS:
       const state = store.getState();
-      const evolutionForDurationThreshold = evolutionLoadAverageForPeriodSelector(state, ALERT_DURATION_THRESHOLD);
+      const evolutionForDurationThreshold =
+        evolutionLoadAverageForPeriodSelector(state, ALERT_DURATION_THRESHOLD);
       const currentAlert = currentAlertSelector(state);
 
       const loadAvg = getLoadAverage(evolutionForDurationThreshold);
@@ -37,7 +40,9 @@ const alertsMiddleware: AppThunkMiddleware = store => next => (action: AllAction
         );
         store.dispatch(displayNotification({
           title: 'High CPU load',
-          body: `Load average during last ${ALERT_DURATION_THRESHOLD / 60 / 1000} minutes: ${loadAvg.toFixed(2)}`,
+          body: `Load average during last ${
+            fromMsToMinutes(ALERT_DURATION_THRESHOLD)
+          } minutes: ${loadAvg.toFixed(2)}`,
           icon: warnIcon,
         }));
         if (!currentAlert) {
@@ -53,14 +58,16 @@ const alertsMiddleware: AppThunkMiddleware = store => next => (action: AllAction
         }
       } else if (currentAlert) {
           // We set current alert to null and add an alert stop message
-          const duration = (Date.now() - currentAlert.startedAt); // Duration in ms
-          store.dispatch(setCurrentAlert(null));
-          store.dispatch(addAlertMessage(ALERT_MESSAGE_TYPES.ALERT_STOP, { duration }));
-          store.dispatch(displayNotification({
-            title: 'Normal CPU Load',
-            body: `Load average during last ${ALERT_DURATION_THRESHOLD / 60 / 1000} minutes return below ${ALERT_LOAD_THRESHOLD}`,
-            icon: okIcon,
-          }));
+        const duration = (Date.now() - currentAlert.startedAt); // Duration in ms
+        store.dispatch(setCurrentAlert(null));
+        store.dispatch(addAlertMessage(ALERT_MESSAGE_TYPES.ALERT_STOP, { duration }));
+        store.dispatch(displayNotification({
+          title: 'Normal CPU Load',
+          body: `Load average during last ${
+            fromMsToMinutes(ALERT_DURATION_THRESHOLD)
+          } minutes return below ${ALERT_LOAD_THRESHOLD}`,
+          icon: okIcon,
+        }));
       }
       break;
     default:

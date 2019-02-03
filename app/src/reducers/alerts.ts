@@ -11,6 +11,7 @@ import {
   Alert,
 } from 'entities/alerts';
 import { AllActions } from 'actions';
+import { fromMinutesToMs } from 'helpers/converters';
 
 export interface AlertsState {
   messages: AlertMessage[];
@@ -29,7 +30,7 @@ const alertMessagesFixture = (nbAlert: number): AlertMessage[] => {
         timestamp,
         type,
         loadAvg: 1 + Math.random() * 3,
-      }
+      };
     }
 
     if (type === ALERT_MESSAGE_TYPES.ALERT_STOP) {
@@ -37,8 +38,8 @@ const alertMessagesFixture = (nbAlert: number): AlertMessage[] => {
         id,
         timestamp,
         type,
-        duration: (2 + Math.random() * 10) * 60 * 1000,
-      }
+        duration: fromMinutesToMs(2 + Math.random() * 10),
+      };
     }
   });
 };
@@ -54,7 +55,10 @@ const addAlertMessage = (state: AlertsState, alertMessage: AlertMessage): Alerts
   messages: [alertMessage, ...state.messages],
 });
 
-const removeAlertMessage = (state: AlertsState, alertMessageID: AlertMessage['id']): AlertsState => ({
+const removeAlertMessage = (
+  state: AlertsState,
+  alertMessageID: AlertMessage['id'],
+): AlertsState => ({
   ...state,
   messages: state.messages.filter(message => message.id !== alertMessageID),
 });

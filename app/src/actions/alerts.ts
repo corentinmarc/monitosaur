@@ -1,6 +1,6 @@
 import {
   createAction,
-  ActionsUnion
+  ActionsUnion,
 } from 'actions/typedActions';
 import {
   ADD_ALERT_MESSAGE,
@@ -14,17 +14,19 @@ import {
 
 export const addAlertMessage = (
   type: AlertMessage['type'],
-  payload: { loadAvg?: number, duration?: number }
+  payload: { loadAvg?: number, duration?: number },
 ) => {
   const timestamp = Date.now();
+  const id = `${type}-${timestamp}`;
   return createAction(ADD_ALERT_MESSAGE, {
-    id: `${type}-${timestamp}`,
+    id,
     type,
     timestamp,
     ...payload,
-  })
+  });
 };
-export const removeAlertMessage = (alertMessageID: AlertMessage['id']) => createAction(REMOVE_ALERT_MESSAGE, { alertMessageID });
+export const removeAlertMessage = (alertMessageID: AlertMessage['id']) =>
+  createAction(REMOVE_ALERT_MESSAGE, { alertMessageID });
 export const setCurrentAlert = (alert: Alert) => createAction(SET_CURRENT_ALERT, { alert });
 
 // Only redux Actions, no thunks

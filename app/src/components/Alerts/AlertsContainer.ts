@@ -19,9 +19,12 @@ const mapStateToProps = (state: AppGlobalState): StateProps => ({
   alertMessages: alertMessagesSelector(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => bindActionCreators({
-  removeAlertMessage,
-}, dispatch);
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => bindActionCreators(
+  {
+    removeAlertMessage,
+  },
+  dispatch,
+);
 
 export default connect<StateProps, DispatchProps, {}, AppGlobalState>(
   mapStateToProps,

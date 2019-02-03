@@ -2,6 +2,7 @@ import React, { SFC } from 'react';
 
 import { Title } from 'components/Title';
 import { Metric } from 'components/Metrics/Metric';
+import { fromBToGB } from 'helpers/converters';
 
 import { StateProps } from './MetricsContainer';
 import styles from './Metrics.m.scss';
@@ -17,7 +18,7 @@ const convertToGB = (value: Maybe<number>): Maybe<string> => {
   if (typeof value !== 'number') {
     return value;
   }
-  return `${(value / 1000000000).toFixed(1)}GB`;
+  return `${(fromBToGB(value)).toFixed(1)}GB`;
 };
 
 const Metrics: SFC<StateProps> = ({

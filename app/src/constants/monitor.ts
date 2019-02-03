@@ -1,14 +1,16 @@
+import { fromMinutesToMs } from 'helpers/converters';
+
 export const MONITORING_URL = 'http://localhost:3000/monitor';
 
 export const MONITOR_INTERVAL = 10000; // 10 seconds
-export const MONITOR_EVOLUTION_DURATION = 60 * 1000; // 1 minutes
-export const MONITOR_EVOLUTION_HISTORY = 60 * 60 * 1000; // 1 hour
+export const MONITOR_EVOLUTION_DURATION = fromMinutesToMs(1); // 1 minutes
+export const MONITOR_EVOLUTION_HISTORY = fromMinutesToMs(60); // 1 hour
 
 export enum MONITOR_PERIODS {
-  '2 Minutes' = 2 * 60 * 1000,
-  '10 Minutes' = 10 * 60 * 1000,
-  '30 Minutes' = 30 * 60 * 1000,
-  '1 Hour' = 60 * 60 * 1000,
+  '2 Minutes' = fromMinutesToMs(2),
+  '10 Minutes' = fromMinutesToMs(10),
+  '30 Minutes' = fromMinutesToMs(30),
+  '1 Hour' = fromMinutesToMs(60),
 }
 
 // Action types
