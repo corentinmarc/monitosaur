@@ -8,8 +8,8 @@ interface Props {
 }
 
 const renderValue = (value: Props['value']) => {
-  if (typeof value === undefined || typeof value === null) {
-    return 'N/A';
+  if (typeof value === undefined || value === null) {
+    return 'Ø';
   }
   return value;
 };

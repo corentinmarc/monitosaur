@@ -2,6 +2,7 @@ import {
   MONITOR_EVOLUTION_HISTORY,
   MONITOR_INTERVAL,
   FETCH_MONITOR_KPI_SUCCESS,
+  FETCH_MONITOR_KPI_FAILURE,
   MONITOR_PERIODS,
   CHANGE_MONITOR_PERIOD,
 } from 'constants/monitor';
@@ -59,6 +60,19 @@ const updateMonitorState = (
   });
 };
 
+const updateMonitorStateWithFailure = (state: MonitorState): MonitorState => {
+  return updateMonitorState(
+    state,
+    {
+      cpus: null,
+      loadAvg: null,
+      freemem: null,
+      totalmem: null,
+      timestamp: Date.now(),
+    },
+  );
+};
+
 const changeMonitorPeriod = (
   state: MonitorState,
   periodToDisplay: MONITOR_PERIODS,
@@ -71,6 +85,9 @@ export default (state: MonitorState = defaultState, action: AllActions): Monitor
   switch (action.type) {
     case FETCH_MONITOR_KPI_SUCCESS:
       return updateMonitorState(state, action.payload.monitorKPIs);
+      break;
+    case FETCH_MONITOR_KPI_FAILURE:
+      return updateMonitorStateWithFailure(state);
       break;
     case CHANGE_MONITOR_PERIOD:
       return changeMonitorPeriod(state, action.payload.period);

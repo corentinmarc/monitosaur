@@ -3,6 +3,7 @@ import {
   START_POLLING_MONITOR_KPI,
   FETCH_MONITOR_KPI_REQUEST,
   FETCH_MONITOR_KPI_SUCCESS,
+  FETCH_MONITOR_KPI_FAILURE,
   CHANGE_MONITOR_PERIOD,
   MONITOR_PERIODS,
 } from 'constants/monitor';
@@ -21,13 +22,18 @@ export const getMonitorKPI = (): AppThunkAction<Promise<void>> => (
     .then((data) => {
       dispatch(fetchMonitorKPISuccess(data));
     })
-    .catch((error) => { console.error(error); });
+    .catch(() => {
+      dispatch(fetchMonitorKPIFailure());
+      console.error('Failed to fetch monitor KPIs');
+    });
 };
 
 export const startPollingMonitorKPI = () => createAction(START_POLLING_MONITOR_KPI);
 export const fetchMonitorKPIRequest = () => createAction(FETCH_MONITOR_KPI_REQUEST);
 export const fetchMonitorKPISuccess = (monitorKPIs: MonitorResponse) =>
   createAction(FETCH_MONITOR_KPI_SUCCESS, { monitorKPIs });
+export const fetchMonitorKPIFailure = () =>
+  createAction(FETCH_MONITOR_KPI_FAILURE);
 
 export const changePeriod = (period: MONITOR_PERIODS) =>
   createAction(CHANGE_MONITOR_PERIOD, { period });
@@ -37,6 +43,7 @@ export const Actions = {
   startPollingMonitorKPI,
   fetchMonitorKPIRequest,
   fetchMonitorKPISuccess,
+  fetchMonitorKPIFailure,
   changePeriod,
 };
 
