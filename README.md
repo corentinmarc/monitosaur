@@ -51,3 +51,4 @@ An `alerting system` display alert messages in the right panel `Alerts` when ALE
 - Add some configuration in the UI to set the ALERT_LOAD_THRESHOLD and the ALERT_DURATION_THRESHOLD. It could be useful to the customer to adapt the alerting for his need.
 - Draw the evolution of other metrics, for exemple the RAM usage.
 - Technically, I think the stack is fine and can scale pretty well. A possible evolution could be to refacto the structure to have a by `domain` approach.
+- We could add tests on reducers.
