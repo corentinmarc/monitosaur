@@ -8,6 +8,12 @@ import {
 import { displayNotification } from 'actions/notifications';
 import { FETCH_MONITOR_KPI_SUCCESS } from 'constants/monitor';
 import {
+  NOTIFICATION_ALERT_TITLE,
+  NOTIFICATION_ALERT_BODY,
+  NOTIFICATION_ALERT_STOP_TITLE,
+  NOTIFICATION_ALERT_STOP_BODY,
+} from 'constants/notifications';
+import {
   ALERT_LOAD_THRESHOLD,
   ALERT_DURATION_THRESHOLD,
   ALERT_MESSAGE_TYPES,
@@ -16,7 +22,6 @@ import { evolutionLoadAverageForPeriodSelector } from 'selectors/monitor';
 import { currentAlertSelector } from 'selectors/alerts';
 import okIcon from 'assets/images/ok.png';
 import warnIcon from 'assets/images/warn.png';
-import { fromMsToMinutes } from 'helpers/converters';
 
 const getLoadAverage = (evolution: MonitorEvolutionPoint[]) =>
   evolution.reduce((total, point) => total + point.loadAvg, 0) / evolution.length;
@@ -39,16 +44,14 @@ const alertsMiddleware: AppThunkMiddleware = store => next => (action: AllAction
           addAlertMessage(ALERT_MESSAGE_TYPES.ALERT, { loadAvg }),
         );
         store.dispatch(displayNotification({
-          title: 'High CPU load',
-          body: `Load average during last ${
-            fromMsToMinutes(ALERT_DURATION_THRESHOLD)
-          } minutes: ${loadAvg.toFixed(2)}`,
+          title: NOTIFICATION_ALERT_TITLE,
+          body: NOTIFICATION_ALERT_BODY(loadAvg),
           icon: warnIcon,
         }));
         if (!currentAlert) {
           // We set a current alert
           store.dispatch(
-            setCurrentAlert({ loadAvg, startedAt: Date.now() }),
+            setCurrentAlert({ loadAvg, startedAt: action.payload.monitorKPIs.timestamp }),
           );
         } else {
           // We update current alert loadAvg
@@ -58,14 +61,12 @@ const alertsMiddleware: AppThunkMiddleware = store => next => (action: AllAction
         }
       } else if (currentAlert) {
           // We set current alert to null and add an alert stop message
-        const duration = (Date.now() - currentAlert.startedAt); // Duration in ms
+        const duration = (action.payload.monitorKPIs.timestamp - currentAlert.startedAt);
         store.dispatch(setCurrentAlert(null));
         store.dispatch(addAlertMessage(ALERT_MESSAGE_TYPES.ALERT_STOP, { duration }));
         store.dispatch(displayNotification({
-          title: 'Normal CPU Load',
-          body: `Load average during last ${
-            fromMsToMinutes(ALERT_DURATION_THRESHOLD)
-          } minutes return below ${ALERT_LOAD_THRESHOLD}`,
+          title: NOTIFICATION_ALERT_STOP_TITLE,
+          body: NOTIFICATION_ALERT_STOP_BODY,
           icon: okIcon,
         }));
       }
