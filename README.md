@@ -10,7 +10,8 @@
   - Install dependencies for the Front app and for the Express server.
   - Build the Front app.
   - Move the builded assets in `public/` folder of Express server.
-  - Start the Express server on `localhost:3000`
+  - Start the Express server on `localhost:3000`.
+  - Open the browser.
 
 ## To test/lint the app:
 - run `yarn test` to test.
@@ -25,7 +26,7 @@
 - `React` is updating the DOM.
 - `D3` to draw chart.
 - State app managed by `Redux`.
-- Styles are component linked using `CSS Modules` and `SASS`.
+- Styles are component scoped using `CSS Modules` and `SASS`.
 - Linting is done with `TSLint`.
 - And a little touch of `Jest` tests.
 
