@@ -8,7 +8,7 @@ export const getEvolutionLoadAvgFixture = (nbPoint: number): MonitorEvolutionPoi
     value = value + (0.5 - Math.random()) * 0.1;
     return {
       timestamp: index,
-      loadAvg: value,
+      loadAvg: Math.max(value, 0),
     };
   });
 };

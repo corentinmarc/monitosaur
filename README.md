@@ -2,6 +2,7 @@
 
 ## Requirements:
 - Have `yarn cli` installed (https://yarnpkg.com/en/docs/install)
+- Have `port 3000 available on localhost`
 
 
 ## To launch the app:
@@ -23,10 +24,10 @@
 ### Front end (`app/`):
 - Bundled via `Webpack`.
 - Written in `Typescript` for type checked code.
-- `React` is updating the DOM.
-- `D3` to draw chart.
+- `React` is rendering the DOM.
+- `D3` draw the chart.
 - State app managed by `Redux`.
-- Styles are component scoped using `CSS Modules` and `SASS`.
+- Styles are component-scoped using `CSS Modules` and `SASS`.
 - Linting is done with `TSLint`.
 - And a little touch of `Jest` tests.
 
@@ -42,14 +43,20 @@ These metrics are displayed in live in left panel `Metrics` (CPU number, CPU loa
 The CPU load is stored with an expiration of 1 hour, it permit to draw the `CPU evolution` in the main panel.
 The `evolution period drawn in the chart is configurable` and choices are: 2 minutes, 10 minutes, 30 minutes or 1 hours.
 
-An `alerting system` display alert messages in the right panel `Alerts` when ALERT_LOAD_THRESHOLD (set to 1) during the ALERT_DURATION_THRESHOLD (set to 2 minutes) is passed.
+An `alerting system` display alert messages in the right panel `Alerts` when ALERT_LOAD_THRESHOLD (set to 1) is passed during the ALERT_DURATION_THRESHOLD (set to 2 minutes).
 
 `Notifications` are also triggered by alerting system if the customer accept to use it.
 
+An effort has been made to have a `responsive layout` (mobile is not managed).
 
 ## Possible Improvements:
+### Functionnaly
 - Debounce the alerts, now it is triggering a message + notification every 10 seconds when on alert zone. It can be disturbing for the customer.
-- Add some configuration in the UI to set the ALERT_LOAD_THRESHOLD and the ALERT_DURATION_THRESHOLD. It could be useful to the customer to adapt the alerting for his need.
+- Add some configuration in the UI to set the ALERT_LOAD_THRESHOLD and the ALERT_DURATION_THRESHOLD. It could be useful for the customer to adapt the alerting for his need.
 - Draw the evolution of other metrics, for exemple the RAM usage.
+
+### Technically
 - Technically, I think the stack is fine and can scale pretty well. A possible evolution could be to refacto the structure to have a by `domain` approach.
+- If the app grow in complexity, using `redux-saga` could help to orchestrate actions dispatch.
 - We could add tests on reducers.
+
