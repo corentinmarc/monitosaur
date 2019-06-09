@@ -1,12 +1,18 @@
 # Monitosaur
+A monitoring App to track CPUs usage.
+
+The app is available as an executable provided by electron, or as a web app in a browser.
 
 ## Requirements:
 - Have `yarn cli` installed (https://yarnpkg.com/en/docs/install)
-- Have `port 3000 available on localhost`
+- Have `port 3000 available on localhost` to launch the app in web app mode.
 
+## Electron app:
+- run `yarn electron:build` to build the app, the executables will be available in the `dist/` folder.
+- run `yarn electron:dev` to serve the app in electron dev mode.
 
-## To launch the app:
-- run `yarn start` or `yarn start-with-fixtures` (to have some fake history data).
+## Web app:
+- run `yarn web:start` or `yarn web:start-with-fixtures` (to have some fake history data).
   This will: 
   - Install dependencies for the Front app and for the Express server.
   - Build the Front app.
@@ -59,4 +65,3 @@ An effort has been made to have a `responsive layout` (mobile is not managed).
 - Technically, I think the stack is fine and can scale pretty well. A possible evolution could be to refacto the structure to have a by `domain` approach.
 - If the app grow in complexity, using `redux-saga` could help to orchestrate actions dispatch.
 - We could add tests on reducers.
-

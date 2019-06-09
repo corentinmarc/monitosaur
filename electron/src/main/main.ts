@@ -51,8 +51,6 @@ function createMainWindow() {
 
 app.on('ready', () => {
   mainWindow = createMainWindow()
-
-  setInterval(() => console.log(getMetrics()), 5000);
 });
 
 app.on('activate', () => {
@@ -70,3 +68,10 @@ app.on('window-all-closed', () => {
   }
 })
 
+export type MainProcessInterface = {
+  getMetrics: typeof getMetrics,
+};
+
+export {
+  getMetrics,
+};
