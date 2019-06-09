@@ -5,7 +5,7 @@ import { Metric } from 'components/Metrics/Metric';
 import { fromBToGB } from 'helpers/converters';
 
 import { StateProps } from './MetricsContainer';
-import styles from './Metrics.m.scss';
+import styles from './Metrics.mscss';
 
 const convertToFixed = (value: Maybe<number>): Maybe<string> => {
   if (typeof value !== 'number') {

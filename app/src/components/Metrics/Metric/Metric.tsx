@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 
-import styles from './Metric.m.scss';
+import styles from './Metric.mscss';
 
 interface Props {
   label: string;

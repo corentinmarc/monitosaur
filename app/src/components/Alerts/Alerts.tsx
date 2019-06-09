@@ -4,7 +4,7 @@ import { Title } from 'components/Title';
 
 import { AlertMessage } from './AlertMessage';
 import { StateProps, DispatchProps } from './AlertsContainer';
-import styles from './Alerts.m.scss';
+import styles from './Alerts.mscss';
 
 const Alerts: SFC<StateProps & DispatchProps> = ({
   alertMessages,

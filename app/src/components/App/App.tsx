@@ -5,7 +5,7 @@ import { Alerts } from 'components/Alerts';
 import { Evolution } from 'components/Evolution';
 
 import { DispatchProps } from './AppContainer';
-import styles from './App.m.scss';
+import styles from './App.mscss';
 
 class App extends Component<DispatchProps> {
   render() {

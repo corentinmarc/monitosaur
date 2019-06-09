@@ -8,7 +8,7 @@ import {
 } from 'constants/alerts';
 import { fromMsToMinutes } from 'helpers/converters';
 
-import styles from './AlertMessage.m.scss';
+import styles from './AlertMessage.mscss';
 
 interface Props {
   id: string;

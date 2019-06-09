@@ -5,7 +5,7 @@ import { Title } from 'components/Title';
 import { EvolutionChart } from './EvolutionChart';
 import { EvolutionPeriodSelect } from './EvolutionPeriodSelect';
 import { StateProps, DispatchProps } from './EvolutionContainer';
-import styles from './Evolution.m.scss';
+import styles from './Evolution.mscss';
 
 const Content: SFC<StateProps & DispatchProps> = ({
   evolutionLoadAverage,

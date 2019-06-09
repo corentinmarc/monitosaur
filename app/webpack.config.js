@@ -36,7 +36,7 @@ module.exports = (env) => {
           },
         },
         {
-          test: /\.scss$/,
+          test: /\.mscss$/,
           loaders: [
             'style-loader?sourceMap',
             {
