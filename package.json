@@ -1,16 +1,22 @@
 {
-  "name": "datadog-hiring-test",
+  "name": "monitoring-app",
   "version": "1.0.0",
-  "description": "Datadog Hiring test",
+  "description": "Monitoring App",
   "author": "corentinmarc <corentin.marc@gmail.com>",
   "scripts": {
-    "build-app": "cd ./app && yarn build:prod",
-    "install-dependencies": "cd ./app && yarn install --pure-lockfile && cd ../server && yarn install --pure-lockfile",
-    "install-public": "mkdir -p ./server/public && cp ./app/build/* ./server/public",
     "lint": "cd ./app && yarn lint",
-    "start-server": "cd ./server && yarn start",
-    "start": "yarn install-dependencies && yarn build-app && yarn install-public && yarn start-server",
-    "start-with-fixtures": "FIXTURES=1 yarn start",
-    "test": "cd ./app && yarn test"
+    "test": "cd ./app && yarn test",
+
+    "web:build": "cd ./app && yarn build:prod",
+    "web:install-dependencies": "cd ./app && yarn install --pure-lockfile && cd ../server && yarn install --pure-lockfile",
+    "web:install-public": "mkdir -p ./server/public && cp ./app/build/* ./server/public",
+    "web:start-server": "cd ./server && yarn start",
+    "web:start": "yarn web:install-dependencies && yarn web:build && yarn web:install-public && yarn web:start-server",
+    "web:start-with-fixtures": "FIXTURES=1 yarn web:start",
+    
+    "electron:dev": "cd ./electron && yarn dev",
+    "electron:compile": "cd ./electron && yarn compile",
+    "electron:build": "cd ./electron && yarn build",
+    "electron:build:dir": "cd ./electron && yarn build:dir"
   }
 }
