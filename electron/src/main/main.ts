@@ -16,7 +16,9 @@ function createMainWindow() {
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
-      },
+    },
+    fullscreen: true,
+    icon: path.resolve(__dirname, '../../build/icon.icns'),
   })
 
   if (isDevelopment) {

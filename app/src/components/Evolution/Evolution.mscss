@@ -23,7 +23,7 @@
       left: 30%;
       right: 30%;
       bottom: 40%;
-      background-image: url('../../assets/images/logo-2.png');
+      background-image: url('../../assets/images/logo-2.svg');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: 50% 50%;

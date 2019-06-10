@@ -1,5 +1,6 @@
 {
   "name": "monitoring-app-electron",
+  "productName": "Monitosaur",
   "version": "1.0.0",
   "description": "Monitoring App - Electron",
   "author": "corentinmarc <corentin.marc@gmail.com>",
