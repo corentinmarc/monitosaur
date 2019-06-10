@@ -1,4 +1,4 @@
-# datadog-test
+# Monitosaur
 
 ## Requirements:
 - Have `yarn cli` installed (https://yarnpkg.com/en/docs/install)
