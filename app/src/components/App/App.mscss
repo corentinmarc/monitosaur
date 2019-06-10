@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   display: flex;
-  background: linear-gradient(45deg,#c024b6,#3023ae);
+  background: linear-gradient(45deg, #3d7dca, #3023ae);
   font-family: 'Mukta Mahee', sans-serif;
   color: #fff;
 }
