@@ -1,5 +1,8 @@
 node_modules/
 .vscode
 .awcache
+.DS_Store
+yarn-error.log
 server/public
 app/build
+dist

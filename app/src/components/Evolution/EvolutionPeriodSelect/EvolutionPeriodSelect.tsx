@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { MONITOR_PERIODS } from 'constants/monitor';
 
-import styles from './EvolutionPeriodSelect.m.scss';
+import styles from './EvolutionPeriodSelect.mscss';
 
 interface Props {
   onSelect: (period: MONITOR_PERIODS) => void;

@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 
-import styles from './Title.m.scss';
+import styles from './Title.mscss';
 
 interface Props {
   label: string;

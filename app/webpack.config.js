@@ -8,7 +8,7 @@ module.exports = (env) => {
   return {
     context: __dirname,
     devtool: isProd ? false : 'eval-source-map',
-    entry: './src/index.tsx',
+    entry: './src/dev.ts',
     output: {
       path: path.resolve(__dirname, 'build'),
       filename: isProd ? 'app.min.js' : 'app.js',
@@ -36,7 +36,7 @@ module.exports = (env) => {
           },
         },
         {
-          test: /\.scss$/,
+          test: /\.mscss$/,
           loaders: [
             'style-loader?sourceMap',
             {
@@ -58,7 +58,7 @@ module.exports = (env) => {
           ],
         },
         {
-          test: /\.png$/,
+          test: /\.(png|svg)$/,
           loaders: [
             'file-loader',
           ],

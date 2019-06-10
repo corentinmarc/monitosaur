@@ -19,11 +19,11 @@
       content: '';
       position: absolute;
       z-index: -1;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url('../../assets/images/logo.png');
+      top: 20%;
+      left: 30%;
+      right: 30%;
+      bottom: 40%;
+      background-image: url('../../assets/images/logo-2.svg');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: 50% 50%;
